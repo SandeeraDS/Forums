@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Forums.Models;
 using Forums.Models.AccountViewModels;
 using Forums.Services;
+using Forums.Data.Models;
 
 namespace Forums.Controllers
 {
