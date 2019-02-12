@@ -8,7 +8,7 @@ namespace Forums.Data
 {
     public interface IForum
     {
-        Forum GetByid(int id);
+        Forum GetById(int id);
         IEnumerable<Forum> GetAll();
         IEnumerable<ApplicationUser> GetAllActiveUsers();
 
