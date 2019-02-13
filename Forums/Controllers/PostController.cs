@@ -33,7 +33,7 @@ namespace Forums.Controllers
                 AuthorImageUrl = post.User.ProfileImageUrl,
                 AuthorRating = post.User.Rating,
                 Created = post.Created,
-                PostContent=post.Content,
+                PostContent = post.Content,
                 Replies = replies
 
             };
@@ -42,14 +42,15 @@ namespace Forums.Controllers
 
         private IEnumerable<PostReplyModel> BuildPostReplies(IEnumerable<PostReply> replies)
         {
-            return replies.Select(reply => new PostReplyModel {
-                Id=reply.Id,
-                AuthorName=reply.User.UserName,
-                AuthorImageUrl=reply.User.ProfileImageUrl,
-                AuthorRating=reply.User.Rating,
-                AuthorId=reply.User.Id,
-                Created=reply.Created,
-                ReplyContent=reply.Content
+            return replies.Select(reply => new PostReplyModel
+            {
+                Id = reply.Id,
+                AuthorName = reply.User.UserName,
+                AuthorImageUrl = reply.User.ProfileImageUrl,
+                AuthorRating = reply.User.Rating,
+                AuthorId = reply.User.Id,
+                Created = reply.Created,
+                ReplyContent = reply.Content
             });
         }
     }
