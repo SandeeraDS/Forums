@@ -12,7 +12,7 @@ namespace Forums.Data.Models
         public DateTime Created { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-        public virtual Forum Form { get; set; }
+        public virtual Forum Forum { get; set; }
 
         public IEnumerable<PostReply> Replies { get; set; }
     }

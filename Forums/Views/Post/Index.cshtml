@@ -2,7 +2,7 @@
 
 <h1>@Model.Title</h1>
 <div>
-    Author: @Model.AuthorName (Model.AuthorRating)
+    Author: @Model.AuthorName (@Model.AuthorRating)
     Created: @Model.Created
 </div>
 <div>
@@ -11,7 +11,8 @@
 
 @if (Model.Replies.Any())
 {
-    foreach (var reply in Model.Replies) {
+    foreach (var reply in Model.Replies)
+    {
 
         <diV>
             <div>

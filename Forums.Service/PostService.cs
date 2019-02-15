@@ -42,8 +42,8 @@ namespace Forums.Service
         {
             return _context.Posts.Where(p => p.Id == id)
                 .Include(p => p.User)
-                .Include(p => p.Replies).ThenInclude(r=>r.User)
-                .Include(p => p.Form).FirstOrDefault();
+                .Include(p => p.Replies).ThenInclude(r => r.User)
+                .Include(p => p.Forum).FirstOrDefault();
         }
 
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)

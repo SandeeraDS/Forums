@@ -6,6 +6,7 @@ using Forums.Data;
 using Forums.Data.Models;
 using Forums.Models.Post;
 using Forums.Models.Reply;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forums.Controllers
@@ -13,10 +14,14 @@ namespace Forums.Controllers
     public class PostController : Controller
     {
         private readonly IPost _postService;
+        private readonly IForum _forumService;
+        private static UserManager<ApplicationUser> _userManager;
 
-        public PostController(IPost postService)
+        public PostController(IPost postService,IForum forumService,UserManager<ApplicationUser> userManager)
         {
             _postService = postService;
+            _forumService = forumService;
+            _userManager = userManager;
         }
 
         public IActionResult Index(int id)
@@ -38,6 +43,49 @@ namespace Forums.Controllers
 
             };
             return View(model);
+        }
+
+        public IActionResult Create(int id)
+        {
+            //Note that id is forum id
+
+            var forum = _forumService.GetById(id);
+
+            var model = new NewPostModel
+            {
+                ForumName = forum.Title,
+                ForumId = forum.Id,
+                ForumImageUrl = forum.ImgUrl,
+                AuthorName = User.Identity.Name
+
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPost(NewPostModel model)
+        {
+            var userId = _userManager.GetUserId(User);
+            var user = await _userManager.FindByIdAsync(userId);
+            var post = BuildPost(model, user);
+
+            await _postService.Add(post);
+
+            return RedirectToAction("Index", "Post", post.Id); 
+        }
+
+        private Post BuildPost(NewPostModel model, ApplicationUser user)
+        {
+            var forum = _forumService.GetById(model.ForumId);
+            return new Post
+            {
+                Title = model.Title,
+                Content = model.Content,
+                Created = DateTime.Now,
+                User = user,
+                Forum=forum
+            };
         }
 
         private IEnumerable<PostReplyModel> BuildPostReplies(IEnumerable<PostReply> replies)
