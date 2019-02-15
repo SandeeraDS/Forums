@@ -52,6 +52,11 @@ namespace Forums.Service
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Post> GetLatestPosts(int nPosts)
+        {
+            return GetAll().OrderByDescending(post => post.Created).Take(nPosts);
+        }
+
         public IEnumerable<Post> GetPostsByForum(int id)
         {
             return _context.Forums.Where(f => f.Id == id).First().Posts;
