@@ -21,7 +21,7 @@ namespace Forums.Service
         public async Task AddAsync(Post post)
         {
             _context.Add(post);
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public Task Delete(int id)
@@ -36,7 +36,10 @@ namespace Forums.Service
 
         public IEnumerable<Post> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Posts.
+                  Include(p => p.Forum).
+                  Include(p => p.User)
+                  .Include(p => p.Replies).ThenInclude(r => r.User);
         }
 
         public Post GetById(int id)
