@@ -14,7 +14,7 @@ namespace Forums.Data
         IEnumerable<Post> GetFilteredPosts(string searchQuery);
         IEnumerable<Post> GetPostsByForum(int id);
 
-        Task Add(Post post);
+        Task AddAsync(Post post);
         Task Delete(int id);
         Task EditPostContent(int id,string newContent);
        

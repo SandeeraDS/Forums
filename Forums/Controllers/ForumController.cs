@@ -79,7 +79,7 @@ namespace Forums.Controllers
 
         private ForumListingModel BuildFormListing(Post post)
         {
-            var forum = post.Form;
+            var forum = post.Forum;
 
             return BuildFormListing(forum);
         }
