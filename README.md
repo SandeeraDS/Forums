@@ -1,2 +1,3 @@
 # Forums
-asp.net core 2.0 project
+asp.net core MVC 2.0 project  
+Code First
